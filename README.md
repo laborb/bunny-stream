@@ -35,7 +35,7 @@ You can get all values in your Bunny Stream Dashboard at [https://dash.bunny.net
 ### Publish config file
 
 ``` bash
-php artisan vendor:publish --tag=bunny-stream-config
+php artisan vendor:publish --tag=bunny-config
 ```
 
 ## How to Use

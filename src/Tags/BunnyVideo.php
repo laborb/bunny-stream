@@ -8,34 +8,18 @@ class BunnyVideo extends \Statamic\Tags\Tags
 
     public function index()
     {
-        $video = '<video
-                id="' . $this->params->get('id') . '"
-                class="' . $this->getClasses() . '"
-                ' . $this->getControls() . ' 
-                preload="auto"
-                width="' . $this->params->get('width') . '"
-                height="' . $this->params->get('height') . '"
-                poster="https://' . config('statamic.bunny.hostname') . '/' . $this->params->get('id') . '/thumbnail.jpg"
-                data-setup="{}"
-                >
-                    <source
-                        src="https://' . config('statamic.bunny.hostname') . '/' . $this->params->get('id') . '/playlist.m3u8"
-                        type="application/x-mpegURL">
-                <p class="vjs-no-js">
-                    Um dieses Video zu sehen wird JavaScript benötigt und ein Browser, der
-                    <a href="https://videojs.com/html5-video-support/" target="_blank"
-                    >HTML5 Videos unterstützt.</a
-                    >
-                </p>
-            </video>';
+        $data = [
+            'id' => $this->params->get('id'),
+            'source' => 'https://' . config('statamic.bunny.hostname') . '/' . $this->params->get('id') . '/playlist.m3u8',
+            'class' => $this->getClasses(),
+            'controls' => $this->params->bool('controls', true),
+            'width' => $this->params->get('width'),
+            'height' => $this->params->get('height'),
+            'poster' => 'https://' . config('statamic.bunny.hostname') . '/' . $this->params->get('id') . '/thumbnail.jpg',
+            'autoplay' => !$this->params->bool('controls', true),
+        ];
 
-        $script = '';
-
-        if (!$this->params->bool('controls', true)) {
-            $script = "<script> var playPromise = document.getElementById('".$this->params->get('id')."'); setTimeout(function () { playPromise.play(); }, 150); </script>";
-        }
-
-        return $video . $script;
+        return view('bunny::video', $data);
     }
 
     public function getClasses()
@@ -62,15 +46,6 @@ class BunnyVideo extends \Statamic\Tags\Tags
             $classes .= ' vjs-1-1';
         }
 
-        return $classes;
-    }
-
-    public function getControls()
-    {
-        if (!$this->params->bool('controls', true)) {
-            return 'muted autoplay loop';
-        }
-
-        return 'controls';
+        return $classes . ' ' . $this->params->get('class');
     }
 }

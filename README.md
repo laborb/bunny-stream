@@ -58,7 +58,7 @@ You can embed previously uploaded videos via the provided Statamic Tag `{{ video
 You should always use the provided `Video` Tag as it includes all options that are available.
 
 ``` antlers
-{{ video :id="bunny_field" :responsive="responsive" :controls="controls" :ratio="ratio" :width="width" :height="height" }}
+{{ video :id="bunny_field" :responsive="responsive" :controls="controls" :ratio="ratio" :width="width" :height="height" class="" }}
 ```
 
 You need to add your own Statamic Fieldset with at least the Bunny Fieldtype included.
@@ -70,6 +70,7 @@ You can also add some options:
 - `controls`: If `true` all controls are available in the video player. If `false` no controls are available and the video will autoplay muted in a loop.
 - `width`: Width of the video player. Only available with `responsive: false`. Preserves the videos ratio.
 - `height`: Height of the video player. Only available with `responsive: false`. Preserves the videos ratio.
+- `class`: You can give additional classes for the video element
 
 #### Example Fieldset
 

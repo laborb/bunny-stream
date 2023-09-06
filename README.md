@@ -72,6 +72,11 @@ You can also add some options:
 - `height`: Height of the video player. Only available with `responsive: false`. Preserves the videos ratio.
 - `class`: You can give additional classes for the video element
 
+#### Thumbnails
+
+You can get the video's thumbnail URL with the video tag: `{{ video:thumbnail :id="id" }}`
+It expects the video ID as a parameter.
+
 #### Example Fieldset
 
 You can use this example fieldset with the provided tag as a layout to include all available options.
@@ -104,7 +109,7 @@ fields:
       visibility: visible
       hide_display: false
   -
-    handle: responsive
+    handle: responsive_video
     field:
       default: true
       type: toggle
@@ -132,7 +137,7 @@ fields:
       visibility: visible
       hide_display: false
       if:
-        responsive: 'equals false'
+        responsive_video: 'equals false'
   -
     handle: height
     field:
@@ -149,7 +154,7 @@ fields:
       visibility: visible
       hide_display: false
       if:
-        responsive: 'equals false'
+        responsive_video: 'equals false'
   -
     handle: ratio
     field:
@@ -168,7 +173,7 @@ fields:
       visibility: visible
       hide_display: false
       if:
-        responsive: 'equals true'
+        responsive_video: 'equals true'
       width: 66
 
 ```

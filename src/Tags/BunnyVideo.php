@@ -22,6 +22,11 @@ class BunnyVideo extends \Statamic\Tags\Tags
         return view('bunny::video', $data);
     }
 
+    public function thumbnail()
+    {
+        return 'https://' . config('statamic.bunny.hostname') . '/' . $this->params->get('id') . '/thumbnail.jpg';
+    }
+
     public function getClasses()
     {
         $classes = 'video-js';

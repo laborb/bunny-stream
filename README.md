@@ -51,14 +51,14 @@ After the processing is done the video is available in the videobrowser and in t
 
 ### Work with videos
 
-You can embed previously uploaded videos via the provided Statamic Tag `{{ video }}` or in the content area via the provided Statamic Fieldtype `Bunny`.
+You can embed previously uploaded videos via the provided Statamic Tag `{{ bunny_video }}` or in the content area via the provided Statamic Fieldtype `Bunny`.
 
 #### Video Tag
 
 You should always use the provided `Video` Tag as it includes all options that are available.
 
 ``` antlers
-{{ video :id="bunny_field" :responsive="responsive" :controls="controls" :ratio="ratio" :width="width" :height="height" class="" }}
+{{ bunny_video :id="bunny_field" :responsive="responsive" :controls="controls" :ratio="ratio" :width="width" :height="height" class="" }}
 ```
 
 You need to add your own Statamic Fieldset with at least the Bunny Fieldtype included.
@@ -74,7 +74,7 @@ You can also add some options:
 
 #### Thumbnails
 
-You can get the video's thumbnail URL with the video tag: `{{ video:thumbnail :id="id" }}`
+You can get the video's thumbnail URL with the video tag: `{{ bunny_video:thumbnail :id="bunny_field" }}`
 It expects the video ID as a parameter.
 
 #### Example Fieldset
@@ -109,7 +109,7 @@ fields:
       visibility: visible
       hide_display: false
   -
-    handle: responsive_video
+    handle: responsive
     field:
       default: true
       type: toggle
@@ -137,7 +137,7 @@ fields:
       visibility: visible
       hide_display: false
       if:
-        responsive_video: 'equals false'
+        responsive: 'equals false'
   -
     handle: height
     field:
@@ -154,7 +154,7 @@ fields:
       visibility: visible
       hide_display: false
       if:
-        responsive_video: 'equals false'
+        responsive: 'equals false'
   -
     handle: ratio
     field:
@@ -173,7 +173,7 @@ fields:
       visibility: visible
       hide_display: false
       if:
-        responsive_video: 'equals true'
+        responsive: 'equals true'
       width: 66
 
 ```

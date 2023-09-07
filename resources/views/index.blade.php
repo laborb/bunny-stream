@@ -10,7 +10,7 @@
     ></overview>
 
     @include('statamic::partials.docs-callout', [
-		'topic' => 'Videobrowser',
-		'url' => 'https://statamic.com/addons/laborb/favicon-generator'
+		'topic' => 'Statamic Bunny Stream',
+		'url' => 'https://github.com/laborb/bunny-stream'
 	])
 @endsection

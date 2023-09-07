@@ -4,7 +4,7 @@ namespace Laborb\BunnyStream\Tags;
  
 class BunnyVideo extends \Statamic\Tags\Tags
 {
-    protected static $handle = 'video';
+    protected static $handle = 'bunny_video';
 
     public function index()
     {

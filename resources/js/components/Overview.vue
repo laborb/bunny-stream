@@ -64,6 +64,7 @@ export default {
             closeAfterFinish: true,
             metaFields: [
                 { id: 'name', name: 'Name', placeholder: 'Dateiname' },
+                { id: 'thumbTime', name: 'Thumbnail Zeistempel', placeholder: 'hh:mm:ss z.B. 00:01:04 für Minute 1, Sekunde 4' },
                 { id: 'bunnyId', name: 'Bunny ID', 
                     render: ({ value }, h) => {
                         return h(
@@ -122,7 +123,7 @@ export default {
                     'content-type': 'application/*+json',
                     AccessKey: this.api
                 },
-                data: '{"title": "' + file.meta.name + '"}'
+                data: '{"title": "' + file.meta.name + '", "thumbnailTime": "' + this.getMsFromTime(file.meta.thumbTime) + '"}'
             };
 
             axios
@@ -148,6 +149,39 @@ export default {
             const d = new Date()
             d.setDate(d.getDate() + 1)
             return d.getTime()
+        },
+
+        getMsFromTime(hms) {
+            if(typeof hms !== "undefined") {
+                if(!this.validateTime(hms)) {
+                    this.uppy.info('Falsches Zeitformat für die Thumbnailerstellung.', 'error', 3000);
+                    throw new Error('Wrong timestamp format for thumbnail creation.');
+                }
+            } else {
+                return 0;
+            }
+
+            let a = hms.split(':');
+
+            let seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+
+            return seconds * 1000;
+        },
+
+        validateTime(timeString) {
+            const timeRegex = /^(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d$/;
+
+            if (!timeRegex.test(timeString)) {
+                return false;
+            }
+
+            const [hours, minutes, seconds] = timeString.split(':').map(Number);
+
+            if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59 || seconds < 0 || seconds > 59) {
+                return false;
+            }
+
+            return true;
         }
     }
 }

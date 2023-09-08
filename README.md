@@ -12,11 +12,13 @@
 
 ## How to Install
 
-This addon is only available through composer:
+### 1. Install via composer
 
 ``` bash
 composer require laborb/bunny-stream
 ```
+
+### 2. Insert CSS and JS files
 
 For the videos to be displayed properly you need to add the Statamic Tag `{{ video_styles:css }}` in the `<head>` section
 and the `{{ video_styles:js }}` tag before the `</body>` element in your layout.
@@ -25,14 +27,18 @@ Alternatively you can add these tags only to pages you want to display videos.
 
 ## How to configure
 
-You need to provide the following config options in `config/statamic/bunny.php`:
-- Your Bunny Stream LibraryID
-- Your Libraries API Key
-- Your Libraries CDN Hostname
+You need to provide the following config options in your evironment:
+``` bash
+BUNNY_LIBRARY_ID=yourid            #Your Bunny Stream LibraryID
+BUNNY_API_KEY=yourapikey           #Your Libraries API Key
+BUNNY_CDN_HOSTNAME=yourcdnhostname #Your Libraries CDN Hostname
+```
 
 You can get all values in your Bunny Stream Dashboard at [https://dash.bunny.net/stream/](https://dash.bunny.net/stream/) `Delivery > Stream > API`
 
-### Publish config file
+### Publish config file (optional)
+
+If you want, you can publish the config file.
 
 ``` bash
 php artisan vendor:publish --tag=bunny-config
@@ -40,7 +46,7 @@ php artisan vendor:publish --tag=bunny-config
 
 ## How to Use
 
-**After you installed the addon you need to add your config options first.**
+**After you installed the addon you need to add your config options in your `.env` first.**
 
 ### Upload videos
 
@@ -94,8 +100,6 @@ fields:
       instructions_position: above
       visibility: visible
       hide_display: false
-      validate:
-        - required
   -
     handle: controls
     field:

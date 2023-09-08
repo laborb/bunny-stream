@@ -6,7 +6,7 @@
  */
 
 return [
-    'libraryId' => null,
-    'apiKey' => '',
-    'hostname' => '',
+    'libraryId' => env('BUNNY_LIBRARY_ID', null),
+    'apiKey' => env('BUNNY_API_KEY', null),
+    'hostname' => env('BUNNY_CDN_HOSTNAME', null),
 ];

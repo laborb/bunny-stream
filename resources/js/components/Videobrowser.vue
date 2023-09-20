@@ -62,6 +62,7 @@
                         <div v-else class="flex flex-col overflow-hidden bg-white rounded shadow-xl w-full mb-4 p-6 items-center justify-center">
                             <h2 class="text-lg">Video wird verarbeitet - {{ video.encodeProgress * 2 }}%</h2>
                             <p class="text-xs text-gray-600">Dies kann einige Zeit in Anspruch nehmen.</p>
+                            <button class="text-xs text-red-500" @click="confirmDeletion(video.guid, video.title)">Abbrechen und Video löschen</button>
                             <div role="status" class="mt-4 mx-auto">
                                 <svg aria-hidden="true" class="w-8 h-8 mr-2 animate-spin" viewBox="0 0 100 101" style="color: #eef2f6" fill="#2D9EFC" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>

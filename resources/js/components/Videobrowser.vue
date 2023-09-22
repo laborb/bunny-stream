@@ -15,7 +15,7 @@
                     <div v-for="video in videos.items">
                         <div v-if="video.status >= 4" class="flex flex-col md:flex-row overflow-hidden bg-white rounded shadow-xl w-full mb-4">
                             <a :href="'https://iframe.mediadelivery.net/play/' + video.videoLibraryId + '/' + video.guid" target="_blank" class="h-64 w-auto md:w-1/2">
-                                <img class="inset-0 h-full w-full object-cover object-center" :src="'https://' + hostname + '/' + video.guid + '/thumbnail.jpg'" />
+                                <img class="inset-0 h-full w-full object-cover object-center" :src="'https://' + hostname + '/' + video.guid + '/' + video.thumbnailFileName" />
                             </a>
                             <div class="w-full md:w-2/3 py-4 px-6 text-gray-800 flex flex-col justify-between">
                                 <div class="flex justify-between">
@@ -34,7 +34,7 @@
                                             <path fill-rule="evenodd" d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z" clip-rule="evenodd" />
                                         </svg>
                                     </a>
-                                    <a :href="'https://' + hostname + '/' + video.guid + '/thumbnail.jpg'" target="_blank" class="flex ml-6 justify-start items-center">
+                                    <a :href="'https://' + hostname + '/' + video.guid + '/' + video.thumbnailFileName" target="_blank" class="flex ml-6 justify-start items-center">
                                         Thumbnail
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="ml-1 w-4 h-4">
                                             <path fill-rule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z" clip-rule="evenodd" />

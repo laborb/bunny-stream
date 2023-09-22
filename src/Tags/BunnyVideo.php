@@ -1,6 +1,8 @@
 <?php
 
 namespace Laborb\BunnyStream\Tags;
+
+use Illuminate\Support\Facades\Http;
  
 class BunnyVideo extends \Statamic\Tags\Tags
 {
@@ -8,6 +10,14 @@ class BunnyVideo extends \Statamic\Tags\Tags
 
     public function index()
     {
+        $request = $this->getVideo($this->params->get('id'));
+
+        if ($request->status() != 200) {
+            return 'Video not found';
+        }
+
+        $video = $request->json();
+
         $data = [
             'id' => $this->params->get('id'),
             'source' => 'https://' . config('statamic.bunny.hostname') . '/' . $this->params->get('id') . '/playlist.m3u8',
@@ -15,7 +25,7 @@ class BunnyVideo extends \Statamic\Tags\Tags
             'controls' => $this->params->bool('controls', true),
             'width' => $this->params->get('width'),
             'height' => $this->params->get('height'),
-            'poster' => 'https://' . config('statamic.bunny.hostname') . '/' . $this->params->get('id') . '/thumbnail.jpg',
+            'poster' => 'https://' . config('statamic.bunny.hostname') . '/' . $this->params->get('id') . '/' . $video['thumbnailFileName'],
             'autoplay' => !$this->params->bool('controls', true),
         ];
 
@@ -24,7 +34,22 @@ class BunnyVideo extends \Statamic\Tags\Tags
 
     public function thumbnail()
     {
-        return 'https://' . config('statamic.bunny.hostname') . '/' . $this->params->get('id') . '/thumbnail.jpg';
+        $request = $this->getVideo($this->params->get('id'));
+
+        if ($request->status() != 200) {
+            return 'Video not found';
+        }
+
+        $video = $request->json();
+
+        return 'https://' . config('statamic.bunny.hostname') . '/' . $this->params->get('id') . '/' . $video['thumbnailFileName'];
+    }
+
+    private function getVideo($videoId) {
+        return Http::withHeaders([
+            'accept' => 'application/json',
+            'AccessKey' => config('statamic.bunny.apiKey')
+        ])->get('https://video.bunnycdn.com/library/' . config('statamic.bunny.libraryId') . '/videos/' . $videoId);
     }
 
     public function getClasses()

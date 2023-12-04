@@ -35,6 +35,7 @@ BUNNY_CDN_HOSTNAME=yourcdnhostname #Your Libraries CDN Hostname
 ```
 
 You can get all values in your Bunny Stream Dashboard at [https://dash.bunny.net/stream/](https://dash.bunny.net/stream/) `Delivery > Stream > API`
+Here you can also define a custom (sub)domain for your CDN hostname.
 
 ### Publish config file (optional)
 
@@ -51,7 +52,7 @@ php artisan vendor:publish --tag=bunny-config
 ### Upload videos
 
 A new CP navigation item appears: `Videobrowser`
-There you can upload and rename (only on upload) your video files.
+There you can upload and rename your video files.
 When they are uploaded, they need to process. The videos are processed directly at bunny. The given progress indicator displays bunnys progress.
 After the processing is done the video is available in the videobrowser and in the included fieldtype.
 

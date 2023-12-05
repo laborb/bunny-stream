@@ -35,7 +35,18 @@ BUNNY_CDN_HOSTNAME=yourcdnhostname #Your Libraries CDN Hostname
 ```
 
 You can get all values in your Bunny Stream Dashboard at [https://dash.bunny.net/stream/](https://dash.bunny.net/stream/) `Delivery > Stream > API`
-Here you can also define a custom (sub)domain for your CDN hostname.
+
+### Add a custom CDN hostname
+
+To add a custom hostname to host the videos from the CDN you can do the following:
+
+1. Login to your bunny dashboard and head over to `Delivery > Stream > API`
+2. At Pull zone click `Manage`
+3. Create a CName entry in your DNS settings pointing to the displayed bunny CDN hostname
+4. Enter your custom hostname in the bunny settings and activate SSL
+5. Use your custom hostname in the .env `BUNNY_CDN_HOSTNAME=yourcdnhostname`
+
+Now your videos are delivered over your custom hostname.
 
 ### Publish config file (optional)
 

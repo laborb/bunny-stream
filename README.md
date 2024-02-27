@@ -76,7 +76,7 @@ You can embed previously uploaded videos via the provided Statamic Tag `{{ bunny
 You should always use the provided `Video` Tag as it includes all options that are available.
 
 ``` antlers
-{{ bunny_video :id="bunny_field" :responsive="responsive" :controls="controls" :ratio="ratio" :width="width" :height="height" class="" }}
+{{ bunny_video :id="bunny_field" :responsive="responsive" :controls="controls" :ratio="ratio" :width="width" :height="height" :captions_enabled="captions_enabled" :captions_src="captions_src" :captions_src_lang="captions_src_lang" :captions_lang="captions_lang" :captions_default="captions_default" class="" }}
 ```
 
 You need to add your own Statamic Fieldset with at least the Bunny Fieldtype included.
@@ -88,7 +88,20 @@ You can also add some options:
 - `controls`: If `true` all controls are available in the video player. If `false` no controls are available and the video will autoplay muted in a loop.
 - `width`: Width of the video player. Only available with `responsive: false`. Preserves the videos ratio.
 - `height`: Height of the video player. Only available with `responsive: false`. Preserves the videos ratio.
+- `captions_enabled`: Enable or disable captions. Expects a boolean.
+- `captions_src`: The URL to the captions file. Expects a valid URL to a .vtt file.
+- `captions_src_lang`: The language of the captions file. Expects a valid language code. Eg. `en`, `de`, `fr`, ...
+- `captions_lang`: The language of the captions to display in the settings. Expects a string like `English`, `Deutsch`, `Français`, ...
+- `captions_default`: If `true` the captions are enabled by default. If `false` the user needs to enable them manually.
 - `class`: You can give additional classes for the video element
+
+#### Video captions
+
+You can add captions to your videos. The captions file needs to be a valid .vtt file. You can host the file in statamic itself or on a different server.
+
+Unfortunately, the Bunny Stream API does not support captions yet. You need to host the file yourself and provide the URL to the video tag.
+
+Currently only one captions file is supported.
 
 #### Thumbnails
 

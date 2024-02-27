@@ -3,7 +3,7 @@
 namespace Laborb\BunnyStream\Tags;
 
 use Illuminate\Support\Facades\Http;
- 
+
 class BunnyVideo extends \Statamic\Tags\Tags
 {
     protected static $handle = 'bunny_video';
@@ -27,6 +27,7 @@ class BunnyVideo extends \Statamic\Tags\Tags
             'height' => $this->params->get('height'),
             'poster' => 'https://' . config('statamic.bunny.hostname') . '/' . $this->params->get('id') . '/' . $video['thumbnailFileName'],
             'autoplay' => !$this->params->bool('controls', true),
+            'captions' => $this->getCaptionSettings(),
         ];
 
         return view('bunny::video', $data);
@@ -45,7 +46,8 @@ class BunnyVideo extends \Statamic\Tags\Tags
         return 'https://' . config('statamic.bunny.hostname') . '/' . $this->params->get('id') . '/' . $video['thumbnailFileName'];
     }
 
-    private function getVideo($videoId) {
+    private function getVideo($videoId)
+    {
         return Http::withHeaders([
             'accept' => 'application/json',
             'AccessKey' => config('statamic.bunny.apiKey')
@@ -77,5 +79,22 @@ class BunnyVideo extends \Statamic\Tags\Tags
         }
 
         return $classes . ' ' . $this->params->get('class');
+    }
+
+    public function getCaptionSettings()
+    {
+        $captions = $this->params->get('captions');
+
+        if ($captions == 'none') {
+            return false;
+        }
+
+        return [
+            'enabled' => $this->params->bool('captions_enabled', false),
+            'src' => $this->params->get('captions_src'),
+            'src_lang' => $this->params->get('captions_src_lang'),
+            'lang' => $this->params->get('captions_lang'),
+            'default' => $this->params->bool('captions_default', false),
+        ];
     }
 }

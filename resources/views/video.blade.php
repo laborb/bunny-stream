@@ -1,21 +1,38 @@
-<video id="{{ $id }}" class="{{ $class }}" preload="auto" width="{{ $width }}" height="{{ $height }}" poster="{{ $poster }}" data-setup="{}" @if($controls) controls @else muted loop autoplay @endif>
+<video id="{{ $id }}" style="--plyr-color-main: {{ $color }};" class="{{ $class }}" preload="auto" width="{{ $width }}" height="{{ $height }}" poster="{{ $poster }}" @if(!$controls) data-plyr-config='{ "controls": false, "clickToPlay": false }' muted autoplay loop @endif crossorigin playsinline >
     <source src="{{ $source }}" type="application/x-mpegURL">
 
     @if($captions['enabled'])
     <track kind="captions" src="{{ $captions['src'] }}" srclang="{{ $captions['src_lang'] }}" label="{{ $captions['lang'] }}" @if($captions['default']) default @endif>
     @endif
 
-    <p class="vjs-no-js">
-        Um dieses Video zu sehen wird JavaScript benötigt und ein Browser, der
-        <a href="https://videojs.com/html5-video-support/" target="_blank">HTML5 Videos unterstützt.</a>
-    </p>
 </video>
 
-@if($autoplay)
 <script>
-    var playPromise = document.getElementById('{{ $id }}');
-    setTimeout(function() {
-        playPromise.play();
-    }, 150);
+document.addEventListener('DOMContentLoaded', () => {
+	const source = '{{ $source }}';
+	const video = document.getElementById('{{ $id }}');
+
+	// For more options see: https://github.com/sampotts/plyr/#options
+	// captions.update is required for captions to work with hls.js
+	const player = new Plyr(video, {captions: {active: true, update: true, language: 'en'}});
+
+	if (!Hls.isSupported()) {
+		video.src = source;
+	} else {
+		// For more Hls.js options, see https://github.com/dailymotion/hls.js
+		const hls = new Hls({ startLevel: 4 });
+		hls.loadSource(source);
+		hls.attachMedia(video);
+		window.hls = hls;
+
+		// Handle changing captions
+		player.on('languagechange', () => {
+			// Caption support is still flaky. See: https://github.com/sampotts/plyr/issues/994
+			setTimeout(() => hls.subtitleTrack = player.currentTrack, 50);
+		});
+	}
+
+	// Expose player so it can be used from the console
+	window.player = player;
+});
 </script>
-@endif

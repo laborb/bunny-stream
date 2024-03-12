@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Handle changing captions
 		player.on('languagechange', () => {
 			// Caption support is still flaky. See: https://github.com/sampotts/plyr/issues/994
-			setTimeout(() => hls.subtitleTrack = player.currentTrack, 50);
+			setTimeout(() => hls.subtitleTrack = player.currentTrack, 500);
 		});
 	}
 

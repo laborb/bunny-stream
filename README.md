@@ -35,6 +35,9 @@ You need to provide the following config options in your evironment:
 BUNNY_LIBRARY_ID=yourid            #Your Bunny Stream LibraryID
 BUNNY_API_KEY=yourapikey           #Your Libraries API Key
 BUNNY_CDN_HOSTNAME=yourcdnhostname #Your Libraries CDN Hostname
+
+BUNNY_PLAY_URL=play                #Define your direct play URL (https://yourdomain.com/BUNNY_PLAY_URL)(optional)
+BUNNY_EMBED_URL=embed                #Define your direct play URL (https://yourdomain.com/BUNNY_EMBED_URL)(optional)
 ```
 
 You can get all values in your Bunny Stream Dashboard at [https://dash.bunny.net/stream/](https://dash.bunny.net/stream/) `Delivery > Stream > API`

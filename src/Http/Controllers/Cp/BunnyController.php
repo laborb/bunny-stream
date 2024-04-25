@@ -4,7 +4,6 @@ namespace Laborb\BunnyStream\Http\Controllers\Cp;
 
 use Illuminate\Http\Request;
 use Statamic\Http\Controllers\CP\CpController;
-use Illuminate\Support\Facades\Http;
 
 final class BunnyController extends CpController
 {
@@ -15,6 +14,6 @@ final class BunnyController extends CpController
 
     public function index()
     {
-        return view('bunny::index');
+        return view("bunny::index");
     }
 }

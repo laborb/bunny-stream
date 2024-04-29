@@ -10,5 +10,4 @@ return [
     "apiKey" => env("BUNNY_API_KEY", null),
     "hostname" => env("BUNNY_CDN_HOSTNAME", null),
     "play_url" => env("BUNNY_PLAY_URL", "play"),
-    "embed_url" => env("BUNNY_EMBED_URL", "embed"),
 ];

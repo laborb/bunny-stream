@@ -9,66 +9,16 @@ class PlayController
 {
     public function index(Request $request, string $videoId)
     {
-        $video = $this->getVideo($videoId);
+        $videoData = $this->getVideo($request, $videoId);
 
-        if ($video->status() != 200) {
-            return response("Video not found", 404);
-        }
-
-        $video = $video->json();
-
-        $data = [
-            "id" => $videoId,
-            "source" =>
-                "https://" .
-                config("statamic.bunny.hostname") .
-                "/" .
-                $videoId .
-                "/playlist.m3u8",
-            "color" => $request->get("color") ?? "333",
-            "poster" =>
-                "https://" .
-                config("statamic.bunny.hostname") .
-                "/" .
-                $videoId .
-                "/" .
-                $video["thumbnailFileName"],
-            "title" => $video["title"],
-        ];
-
-        return view("bunny::public.play", $data);
+        return view("bunny::public.play", $videoData);
     }
 
     public function embed(Request $request, string $videoId)
     {
-        $video = $this->getVideo($videoId);
+        $videoData = $this->getVideo($request, $videoId);
 
-        if ($video->status() != 200) {
-            return response("Video not found", 404);
-        }
-
-        $video = $video->json();
-
-        $data = [
-            "id" => $videoId,
-            "source" =>
-                "https://" .
-                config("statamic.bunny.hostname") .
-                "/" .
-                $videoId .
-                "/playlist.m3u8",
-            "color" => $request->get("color") ?? "333",
-            "poster" =>
-                "https://" .
-                config("statamic.bunny.hostname") .
-                "/" .
-                $videoId .
-                "/" .
-                $video["thumbnailFileName"],
-            "title" => $video["title"],
-        ];
-
-        return view("bunny::public.embed", $data);
+        return view("bunny::public.embed", $videoData);
     }
 
     public function links()
@@ -79,9 +29,9 @@ class PlayController
         ]);
     }
 
-    private function getVideo($videoId)
+    private function getVideo(Request $request, $videoId): array
     {
-        return Http::withHeaders([
+        $video = Http::withHeaders([
             "accept" => "application/json",
             "AccessKey" => config("statamic.bunny.apiKey"),
         ])->get(
@@ -90,5 +40,31 @@ class PlayController
                 "/videos/" .
                 $videoId
         );
+
+        if ($video->status() != 200) {
+            return response("Video not found", 404);
+        }
+
+        $video = $video->json();
+
+        return [
+            "id" => $videoId,
+            "source" =>
+                "https://" .
+                config("statamic.bunny.hostname") .
+                "/" .
+                $videoId .
+                "/playlist.m3u8",
+            "color" => $request->get("color") ?? "333",
+            "poster" =>
+                "https://" .
+                config("statamic.bunny.hostname") .
+                "/" .
+                $videoId .
+                "/" .
+                $video["thumbnailFileName"],
+            "title" => $video["title"],
+            "embedUrl" => route("bunny.public.embed", ["videoId" => $videoId]),
+        ];
     }
 }

@@ -17,7 +17,7 @@ Route::namespace("\Laborb\BunnyStream\Http\Controllers\Public")
         )->name("play");
 
         Route::get(
-            config("statamic.bunny.embed_url") . "/{videoId}",
+            config("statamic.bunny.play_url") . "/embed/{videoId}",
             "PlayController@embed"
         )->name("embed");
 

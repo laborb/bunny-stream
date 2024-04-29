@@ -9,6 +9,17 @@
 
         <title>{{ $title }}</title>
 
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "VideoObject",
+              "name": "{{ $title }}",
+              "description": "",
+              "thumbnailUrl": "{{ $poster }}",
+              "embedUrl": "{{ $embedUrl }}"
+            }
+        </script>
+
         <style>
 	        html, body {
 	     	    background-color: #{{{ $color }}};

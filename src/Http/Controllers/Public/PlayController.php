@@ -25,7 +25,7 @@ class PlayController
     {
         return response()->json([
             "directPlayUrl" => url(config("statamic.bunny.play_url")),
-            "embedUrl" => url(config("statamic.bunny.embed_url")),
+            "embedUrl" => url(config("statamic.bunny.play_url") . "/embed"),
         ]);
     }
 

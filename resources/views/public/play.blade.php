@@ -9,6 +9,32 @@
 
         <title>{{ $title }}</title>
 
+        <meta property="og:url" content="{{ $embedUrl }}" />
+        <meta property="og:image" content="{{ $poster }}" />
+        <meta property="og:image:secure_url" content="{{ $poster }}" />
+        <meta property="og:site_name" content="{{ request()->root() }}" />
+        <meta property="og:title" content="{{ $title }}" />
+        <meta property="og:description" content="" />
+        <meta property="og:type" content="video.other" />
+
+        <meta property="og:video:url" content="{{ $source }}" />
+        <meta property="og:video:secure_url" content="{{ $source }}" />
+
+        <meta property="og:video:type" content="text/html" />
+        <meta property="og:video:width" content="1920">
+        <meta property="og:video:height" content="1080">
+
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="player">
+        <meta property="twitter:domain" content="{{ request()->root() }}">
+        <meta property="twitter:url" content="{{ $embedUrl }}">
+        <meta name="twitter:title" content="{{ $title }}">
+        <meta name="twitter:description" content="">
+        <meta name="twitter:image" content="{{ $poster }}">
+        <meta name="twitter:player" content="{{ $embedUrl }}">
+        <meta name="twitter:player:width" content="1920">
+        <meta name="twitter:player:height" content="1080">
+
         <script type="application/ld+json">
             {
               "@context": "https://schema.org",

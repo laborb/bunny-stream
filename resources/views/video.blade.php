@@ -1,5 +1,5 @@
-<video id="{{ $id }}" style="--plyr-color-main: {{ $color }};" class="{{ $class }}" preload="auto" width="{{ $width }}" height="{{ $height }}" poster="{{ $poster }}" @if(!$controls) data-plyr-config='{ "controls": false, "clickToPlay": false, "playsinline": false }' muted autoplay loop @endif crossorigin>
-    <source src="{{ $source }}" type="application/x-mpegURL">
+<video id="{{ $id }}" style="--plyr-color-main: {{ $color }};" class="{{ $class }}" preload="auto" width="{{ $width }}" height="{{ $height }}" poster="{{ $poster }}" @if(!$controls) data-plyr-config='{ "controls": false, "clickToPlay": false }' muted playsinline autoplay loop @endif crossorigin>
+	<source src="{{ $source }}" type="application/x-mpegURL">
 
     @if($captions['enabled'])
     <track kind="captions" src="{{ $captions['src'] }}" srclang="{{ $captions['src_lang'] }}" label="{{ $captions['lang'] }}" @if($captions['default']) default @endif>

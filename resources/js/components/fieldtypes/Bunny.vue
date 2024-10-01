@@ -9,7 +9,7 @@
             :clearable="false"
             :disabled="false"
             :options="options"
-            placeholder="Video auswählen"
+            :placeholder="__('Video auswählen')"
             :searchable="true"
             :multiple="false"
             :reset-on-options-change="false"

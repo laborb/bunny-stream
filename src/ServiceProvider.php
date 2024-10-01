@@ -28,7 +28,7 @@ class ServiceProvider extends AddonServiceProvider
     {
         // Extend CP Nav
         Nav::extend(function ($nav) {
-            $nav->content("Videobrowser")
+            $nav->content(__("Videobrowser"))
                 ->section("Content")
                 ->route("bunny.index")
                 ->icon(
@@ -37,6 +37,8 @@ class ServiceProvider extends AddonServiceProvider
         });
 
         Fieldtypes\Bunny::register();
+
+        $this->loadJsonTranslationsFrom(__DIR__.'/../lang');
 
         $this->mergeConfigFrom(
             __DIR__ . "/../config/bunny.php",

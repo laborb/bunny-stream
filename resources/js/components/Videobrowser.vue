@@ -19,7 +19,7 @@
                         fill="currentFill"
                     />
                 </svg>
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">{{ __('Loading...') }}</span>
             </div>
         </div>
         <div v-else-if="!loading && videos.totalItems >= 1">
@@ -106,7 +106,7 @@
                                         target="_blank"
                                         class="flex justify-start items-center"
                                     >
-                                        Direct Play
+                                        {{ __('Direct Play') }}
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 20 20"
@@ -130,7 +130,7 @@
                                         target="_blank"
                                         class="flex ml-6 justify-start items-center"
                                     >
-                                        Embed URL
+                                        {{ __('Embed URL') }}
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 20 20"
@@ -161,7 +161,7 @@
                                         target="_blank"
                                         class="flex ml-6 justify-start items-center"
                                     >
-                                        Thumbnail
+                                        {{ __('Thumbnail') }}
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 20 20"
@@ -229,11 +229,11 @@
                             class="flex flex-col overflow-hidden bg-white rounded shadow-xl w-full mb-4 p-6 items-center justify-center"
                         >
                             <h2 class="text-lg">
-                                Video wird verarbeitet -
+                                {{ __('Video wird verarbeitet') }} -
                                 {{ video.encodeProgress * 2 }}%
                             </h2>
                             <p class="text-xs text-gray-600">
-                                Dies kann einige Zeit in Anspruch nehmen.
+                                {{ __('Dies kann einige Zeit in Anspruch nehmen.') }}
                             </p>
                             <button
                                 class="text-xs text-red-500"
@@ -241,7 +241,7 @@
                                     confirmDeletion(video.guid, video.title)
                                 "
                             >
-                                Abbrechen und Video löschen
+                                {{ __('Abbrechen und Video löschen') }}
                             </button>
                             <div role="status" class="mt-4 mx-auto">
                                 <svg
@@ -261,7 +261,7 @@
                                         fill="currentFill"
                                     />
                                 </svg>
-                                <span class="sr-only">Loading...</span>
+                                <span class="sr-only">{{ __('Loading...') }}</span>
                             </div>
                         </div>
                     </div>
@@ -273,7 +273,7 @@
             v-else
             class="flex flex-col overflow-hidden border-gray-600 border-dashed border-2 rounded shadow-xl w-full mb-4 p-6 items-center justify-center"
         >
-            <h2 class="text-xl">Video hochladen</h2>
+            <h2 class="text-xl">{{ __('Video hochladen') }}</h2>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -292,7 +292,7 @@
 
         <confirmation-modal
             v-if="triggerDeletion"
-            :title="'Video ' + this.videoTitleToDelete + ' löschen?'"
+            :title="__('Video :title löschen?', { title: this.videoTitleToDelete })"
             @confirm="deleteVideo"
             @cancel="cancelDeletion"
             danger="true"
@@ -399,7 +399,7 @@ export default {
                 .then((response) => {
                     this.cancelDeletion();
                     this.loading = false;
-                    this.$toast.success("Video erfolgreich gelöscht.");
+                    this.$toast.success(__("Video erfolgreich gelöscht."));
                     this.getVideos();
                 })
                 .catch(function (error) {

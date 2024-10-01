@@ -18,18 +18,18 @@
                 </header>
                 <div class="flex-1 px-5 py-6 text-gray">
                     <div class="px-2 m-0 @container form-group publish-field text-fieldtype w-full">
-                        <label for="title" class="block">Titel</label>
+                        <label for="title" class="block">{{ __('Titel') }}</label>
                         <div class="input-group">
                             <input type="text" id="title" name="title" v-model="videoTitle" class="input-text">
                         </div>
                     </div>
 
                     <div class="px-2 m-0 @container form-group publish-field text-fieldtype w-full">
-                        <label for="thumbnail" class="block">Thumbnail URL</label>
+                        <label for="thumbnail" class="block">{{ __('Thumbnail URL') }}</label>
                         <div class="input-group">
                             <input type="text" id="thumbnail" name="thumbnail" v-model="thumbnailUrl" class="input-text">
                         </div>
-                        <small class="text-xs">Wenn das Thumbnail geändert werden soll, kann hier die direkte URL zum neuen Bild eingegeben werden.</small>
+                        <small class="text-xs">{{ __('Wenn das Thumbnail geändert werden soll, kann hier die direkte URL zum neuen Bild eingegeben werden.') }}</small>
                     </div>
                 </div>
                 <div class="px-5 py-3 bg-gray-200 rounded-b-lg border-t flex items-center justify-end text-sm">
@@ -88,12 +88,12 @@ export default {
             axios
             .request(options)
             .then((response) => {
-                this.$toast.success('Videoname wurde geändert');
+                this.$toast.success(__('Videoname wurde geändert'));
                 this.$progress.complete('title');
                 emitter.emit('load');
             })
             .catch((error) => {
-                this.$toast.error('Fehler beim Speichern');
+                this.$toast.error(__('Fehler beim Speichern'));
                 console.error(error);
                 this.$progress.complete('title');
             });
@@ -111,13 +111,13 @@ export default {
             axios
             .request(options)
             .then((response) => {
-                this.$toast.success('Thumbnail wurde geändert.');
+                this.$toast.success(__('Thumbnail wurde geändert.'));
                 this.thumbnailUrl = null;
                 this.$progress.complete('thumbnail');
                 emitter.emit('load');
             })
             .catch((error) => {
-                this.$toast.error('Fehler beim Ändern des Thumbnails');
+                this.$toast.error(__('Fehler beim Ändern des Thumbnails'));
                 console.error(error);
                 this.$progress.complete('thumbnail');
             });
